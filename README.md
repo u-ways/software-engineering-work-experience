@@ -101,4 +101,8 @@ covered in this tour. Feel free to explore these resources, or use your own. The
 
 These resources can be found in the project's Wiki page: [Software Engineering Work Experience Wiki](https://github.com/u-ways/software-engineering-workexperience/wiki)
 
+### The challenge details 🧩
+
+The challenge details can be found in the Wiki: [Challenge - The Firmament Project](https://github.com/u-ways/software-engineering-workexperience/wiki/challenge_the_firmament_project)
+
 ___
