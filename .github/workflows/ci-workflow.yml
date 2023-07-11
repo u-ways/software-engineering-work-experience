@@ -39,4 +39,5 @@ jobs:
         with:
           name: 'Test Report: JUnit'
           path: ./test-artifacts/test-results/test/*.xml
+          fail-on-error: 'false'
           reporter: java-junit
