@@ -1,7 +1,5 @@
 package io.github.u.ways
 
-import io.kotest.matchers.booleans.shouldBeFalse
-import io.kotest.matchers.booleans.shouldBeTrue
 import java.util.stream.Stream
 import org.junit.jupiter.api.*
 import org.junit.jupiter.params.ParameterizedTest
@@ -12,8 +10,7 @@ class Challenge2Test : ChallengeBaseTest() {
     @Test
     fun `should invalidate request when no products are requested`() {
         challenge2(withRequest(internet = false, tv = false, mobile = false, landline = false))
-            .shouldBeFalse()
-            .apply { withExpectedOutput("No products requested!") }
+        withExpectedOutput("No products requested!")
     }
 
     @ParameterizedTest
@@ -31,7 +28,8 @@ class Challenge2Test : ChallengeBaseTest() {
                 mobile = mobile,
                 landline = landline,
             )
-        ).shouldBeTrue()
+        )
+        shouldNotOutput("No products requested!")
     }
 
     companion object {

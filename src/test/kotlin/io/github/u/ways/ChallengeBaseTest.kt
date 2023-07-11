@@ -2,6 +2,7 @@ package io.github.u.ways
 
 import io.github.u.ways.domain.Request
 import io.kotest.matchers.string.shouldContain
+import io.kotest.matchers.string.shouldNotContain
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 import org.junit.jupiter.api.AfterEach
@@ -21,8 +22,11 @@ abstract class ChallengeBaseTest {
         System.setOut(standardOut)
     }
 
-    internal fun withExpectedOutput(expected: String) =
+    internal fun withExpectedOutput(expected: String): String? =
         outputStreamCaptor.toString().trim() shouldContain expected
+
+    internal fun shouldNotOutput(unexpected: String): String? =
+        outputStreamCaptor.toString().trim() shouldNotContain unexpected
 
     companion object {
         internal fun withRequest(

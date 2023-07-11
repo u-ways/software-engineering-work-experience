@@ -1,6 +1,6 @@
 package io.github.u.ways
 
-fun challenge5(request: List<String>): Boolean {
+fun challenge5(request: List<String>) {
     println(
         """
             I've received the following request:
@@ -14,5 +14,4 @@ fun challenge5(request: List<String>): Boolean {
             - Landline: ${request[7]}
         """.trimIndent()
     )
-    return false
 }

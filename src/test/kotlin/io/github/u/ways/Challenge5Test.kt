@@ -1,7 +1,5 @@
 package io.github.u.ways
 
-import io.kotest.matchers.booleans.shouldBeFalse
-import io.kotest.matchers.booleans.shouldBeTrue
 import java.util.stream.IntStream
 import java.util.stream.Stream
 import org.junit.jupiter.api.Assertions.*
@@ -14,38 +12,27 @@ class Challenge5Test : ChallengeBaseTest() {
     @ParameterizedTest
     @MethodSource("provideRoutingRequests")
     fun `should route to appropriate department`(request: List<String>, expectedOutput: String) {
-        challenge5(request).shouldBeTrue()
+        challenge5(request)
         withExpectedOutput(expectedOutput)
     }
 
     @Test
     fun `should reject when no product is requested`() {
-        val request = listOf(
-            "John Doe",
-            "john.doe@email.com",
-            "0123456789",
-            "123, Some Street, Some City, Some Country",
-            "false",
-            "false",
-            "false",
-            "false"
-        )
-
-        challenge5(request).shouldBeFalse()
+        challenge5(withListRequest(internet = false, tv = false, mobile = false, landline = false))
         withExpectedOutput("No products requested!")
     }
 
     @ParameterizedTest
     @MethodSource("provideInvalidRequests")
     fun `should reject when mandatory field is missing`(request: List<String>) {
-        challenge5(request).shouldBeFalse()
+        challenge5(request)
         withExpectedOutput("A mandatory field is missing!")
     }
 
     @ParameterizedTest
     @MethodSource("provideSingleProductRequests")
     fun `should print product codes`(request: List<String>, expectedOutput: String) {
-        challenge5(request).shouldBeTrue()
+        challenge5(request)
         withExpectedOutput(expectedOutput)
     }
 
