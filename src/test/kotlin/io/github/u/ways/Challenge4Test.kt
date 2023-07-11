@@ -10,7 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class FirmamentLevel4Test {
+class Challenge4Test {
 
     private val standardOut = System.out
     private val outputStreamCaptor = ByteArrayOutputStream()
@@ -28,7 +28,7 @@ class FirmamentLevel4Test {
     @ParameterizedTest
     @MethodSource("provideProductRequests")
     fun `should print product codes`(request: Request, expectedOutput: String) {
-        FirmamentLevel4.solution(request)
+        challenge4(request)
         outputStreamCaptor.toString().trim() shouldBe expectedOutput
     }
 

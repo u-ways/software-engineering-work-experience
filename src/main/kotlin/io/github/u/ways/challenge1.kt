@@ -2,9 +2,9 @@ package io.github.u.ways
 
 import io.github.u.ways.domain.Request
 
-object FirmamentLevel1 {
-    fun solution(request: Request) {
-        println("""
+fun challenge1(request: Request) {
+    println(
+        """
             I've received the following request: 
             - Name: ${request.name}
             - Email: ${request.email}
@@ -14,6 +14,6 @@ object FirmamentLevel1 {
             - TV: ${request.tv}
             - Mobile: ${request.mobile}
             - Landline: ${request.landline}
-        """.trimIndent())
-    }
+        """.trimIndent()
+    )
 }

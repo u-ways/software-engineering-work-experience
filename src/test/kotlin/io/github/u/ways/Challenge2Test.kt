@@ -12,7 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class FirmamentLevel2Test {
+class Challenge2Test {
 
     private val standardOut = System.out
     private val outputStreamCaptor = ByteArrayOutputStream()
@@ -40,7 +40,7 @@ class FirmamentLevel2Test {
             landline = false,
         )
 
-        val result = FirmamentLevel2.solution(request)
+        val result = challenge2(request)
 
         result.shouldBeFalse()
         outputStreamCaptor.toString().trim() shouldBe "No products requested!"
@@ -60,7 +60,7 @@ class FirmamentLevel2Test {
             landline = landline,
         )
 
-        val result = FirmamentLevel2.solution(request)
+        val result = challenge2(request)
 
         result.shouldBeTrue()
     }

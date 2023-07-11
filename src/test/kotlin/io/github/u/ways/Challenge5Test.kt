@@ -15,7 +15,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class FirmamentLevel5Test {
+class Challenge5Test {
 
     private val standardOut = System.out
     private val outputStreamCaptor = ByteArrayOutputStream()
@@ -33,7 +33,7 @@ class FirmamentLevel5Test {
     @ParameterizedTest
     @MethodSource("provideRoutingRequests")
     fun `should route to appropriate department`(request: List<String>, expectedOutput: String) {
-        val result = FirmamentLevel5.solution(request)
+        val result = challenge5(request)
         result.shouldBeTrue()
         outputStreamCaptor.toString().trim().contains(expectedOutput).shouldBeTrue()
     }
@@ -51,7 +51,7 @@ class FirmamentLevel5Test {
             "false"
         )
 
-        val result = FirmamentLevel5.solution(request)
+        val result = challenge5(request)
         result.shouldBeFalse()
         outputStreamCaptor.toString().trim() shouldBe "No products requested!"
     }
@@ -59,7 +59,7 @@ class FirmamentLevel5Test {
     @ParameterizedTest
     @MethodSource("provideInvalidRequests")
     fun `should reject when mandatory field is missing`(request: List<String>) {
-        val result = FirmamentLevel5.solution(request)
+        val result = challenge5(request)
         result.shouldBeFalse()
         outputStreamCaptor.toString().trim() shouldBe "A mandatory field is missing!"
     }
@@ -67,7 +67,7 @@ class FirmamentLevel5Test {
     @ParameterizedTest
     @MethodSource("provideProductRequests")
     fun `should print product codes`(request: List<String>, expectedOutput: String) {
-        val result = FirmamentLevel5.solution(request)
+        val result = challenge5(request)
         result.shouldBeTrue()
         outputStreamCaptor.toString().trim() shouldBe expectedOutput
     }

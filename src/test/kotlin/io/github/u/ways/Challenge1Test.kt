@@ -9,7 +9,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class FirmamentLevel1Test {
+class Challenge1Test {
     private val standardOut = System.out
     private val outputStreamCaptor = ByteArrayOutputStream()
 
@@ -36,7 +36,7 @@ class FirmamentLevel1Test {
             landline = false,
         )
 
-        FirmamentLevel1.solution(request)
+        challenge1(request)
 
         outputStreamCaptor.toString().trim() shouldContain "Routing to Broadband department!"
     }
@@ -54,7 +54,7 @@ class FirmamentLevel1Test {
             landline = false,
         )
 
-        FirmamentLevel1.solution(request)
+        challenge1(request)
 
         outputStreamCaptor.toString().trim() shouldBe "Routing to Telecom department!"
     }
@@ -72,7 +72,7 @@ class FirmamentLevel1Test {
             landline = false,
         )
 
-        FirmamentLevel1.solution(request)
+        challenge1(request)
 
         outputStreamCaptor.toString().trim() shouldBe "Routing to Broadband & Telecom departments!"
     }

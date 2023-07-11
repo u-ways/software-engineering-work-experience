@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.Arguments
 import java.util.stream.Stream
 
-class FirmamentLevel3Test {
+class Challenge3Test {
 
     private val standardOut = System.out
     private val outputStreamCaptor = ByteArrayOutputStream()
@@ -40,14 +40,14 @@ class FirmamentLevel3Test {
             landline = false,
         )
 
-        val result = FirmamentLevel3.solution(request)
+        val result = challenge3(request)
         result.shouldBeTrue()
     }
 
     @ParameterizedTest
     @MethodSource("provideInvalidRequests")
     fun `should invalidate request when a mandatory field is missing`(request: Request) {
-        val result = FirmamentLevel3.solution(request)
+        val result = challenge3(request)
         result.shouldBeFalse()
         outputStreamCaptor.toString().trim() shouldBe "A mandatory field is missing!"
     }
