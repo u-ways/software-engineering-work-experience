@@ -1,5 +1,17 @@
 # 🚀 Software Engineering - The Work Experience Edition 🚀
 
+## Table of Contents 📑
+- [Introduction 📜](#introduction-)
+- [On The Agenda 📅](#on-the-agenda-)
+  - [Day 1 - The Basics & The Project 🔬](#day-1---the-basics--the-project-)
+  - [Day 2 - Continue the Project as a Team Member 👨‍💻](#day-2---continue-the-project-as-a-team-member-)
+- [Learning objectives 🎯](#learning-objectives-)
+- [Getting Started 🏁](#getting-started-)
+  - [Prerequisites 👓](#prerequisites-)
+  - [Setup 🛠️](#setup-)
+  - [Research Break Learning Resources 📚](#research-break-learning-resources-)
+  - [The Challenge 🏆](#the-challenge-)
+
 ## Introduction 📜
 
 Welcome to our Software Engineering work experience tour! Today, we present you with a unique opportunity to gain 
@@ -44,12 +56,12 @@ to applying what you've learned in a mini-project that reflects a real-world sce
 12. Sign-off ceremony - Presenting your solution to the team, and handing it over to the testers. (10 minutes)
 13. The Wrap Up - Feedback, Q&A, and closing remarks. (15 minutes)
 
-### Day 2 - Shadowing Our Team 👨‍💻
+### Day 2 - Continue the Project as a Team Member 👨‍💻
 
-In the next day, you will get the opportunity to shadow our team of experts, learning about their roles and, 
-most importantly, how they work together to bring concepts to life. You will be assigned a mentor who will guide you
-throughout the day, answering any questions you may have and helping you understand the different aspects of software
-engineering.
+In the next day, you will get the opportunity to participate in our stand-up meeting, shadow our team of experts, 
+learning more about their roles and, most importantly, how they work together to bring concepts to life. You will be 
+assigned a mentor who will guide you throughout the day, answering any questions you may have and helping you understand 
+the different aspects of software engineering.
 
 ## Learning objectives 🎯
 
@@ -80,15 +92,21 @@ you to consider a rewarding career in this field.
 ## Getting Started 🏁
 
 ### Prerequisites 👓
-- Install IntelliJ IDEA Community Edition ([Windows](https://www.jetbrains.com/idea/download/?section=windows) | [MacOS](https://www.jetbrains.com/idea/download/?section=mac))
+- A workstation, can be your own laptop, or a laptop provided by us. 
+- Access to the internet, our team will provide you with guest WiFi details if you're on-site.
 
 ### Setup 🛠️
-1. Download this repository: [software-engineering-workexperience (ZIP)](https://github.com/u-ways/software-engineering-workexperience/archive/refs/heads/main.zip)
-2. Extract the ZIP file to a folder of your choice.
-3. Open IntelliJ IDEA and select `File > Open...` from the menu bar.
-4. Navigate to the folder where you extracted the ZIP file, and select the `software-engineering-workexperience` folder.
-5. Click `Open`.
-6. Wait for IntelliJ IDEA to finish loading the project.
+1. [Create a GitHub account](https://github.com/signup) (Or log in to your existing account)
+2. [Fork this repository](https://github.com/u-ways/kotlin-quarkus-realworld-example-app/fork) to have your own copy of the project.
+   - Keep the forked repository public, so that our team can access it and so you can show it off to your friends and family!
+   - If you want to learn about forking in detail, [read this guide](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
+3. We are going to use the Kotlin Playground to write and run our code as our cloud-based IDE. 
+   - [Click here to open the Kotlin Playground](https://play.kotlinlang.org/#eyJ2ZXJzaW9uIjoiMS45LjAiLCJwbGF0Zm9ybSI6ImphdmEiLCJhcmdzIjoiIiwibm9uZU1hcmtlcnMiOnRydWUsInRoZW1lIjoiaWRlYSIsImNvZGUiOiJmdW4gbWFpbigpIHtcbiAgICB2YWwga290bGluID0gXCLwn5mCXCJcbiAgICBwcmludGxuKGtvdGxpbilcbn0ifQ==).
+   - If you're having any issues with the Kotlin Playground, please let us know, and we'll help you out.
+4. Join our Slack or Teams workspace to communicate with our team and ask any questions. 
+   - We will provide you with the workspace details on the day of the tour.
+   - This is entirely optional if you're working with us on-site, as you're more than welcome to ask us in person.
+5. Yourself!
 
 ### Research Break Learning Resources 📚
 
@@ -99,10 +117,13 @@ about them.
 To help you with this, we've compiled a list of resources that you can use to learn more about the different topics
 covered in this tour. Feel free to explore these resources, or use your own. The choice is yours!
 
-These resources can be found in the project's Wiki page: [Software Engineering Work Experience Wiki](https://github.com/u-ways/software-engineering-workexperience/wiki)
+These resources can be found in the project's Wiki page: [Wiki - Software Engineering Work Experience](https://github.com/u-ways/software-engineering-workexperience/wiki).
 
-### The challenge details 🧩
+### The challenge 🏆
 
-The challenge details can be found in the Wiki: [Challenge - The Firmament Project](https://github.com/u-ways/software-engineering-workexperience/wiki/challenge_the_firmament_project)
+When you're ready you can find the challenge details in the following page: [Challenge - The Firmament Project](./docs/challenge_-_the_firmament_project.md).
+
+Remember, this is not an exam, we want you to have fun and learn as much as you can, so don't worry if you don't
+understand something, just ask us, and we'll help you out!
 
 ___
