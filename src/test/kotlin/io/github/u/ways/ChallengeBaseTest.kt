@@ -1,5 +1,6 @@
 package io.github.u.ways
 
+import io.github.u.ways.config.Constants.INVERSE_MATCHER
 import io.github.u.ways.domain.Request
 import io.kotest.matchers.string.shouldContain
 import io.kotest.matchers.string.shouldNotContain
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach
 abstract class ChallengeBaseTest {
     private val standardOut = System.out
     private val outputStreamCaptor = ByteArrayOutputStream()
+    private val inverseMatcher = System.getProperty(INVERSE_MATCHER)?.toBoolean() ?: false
 
     @BeforeEach
     fun setUp() {
@@ -23,7 +25,12 @@ abstract class ChallengeBaseTest {
     }
 
     internal fun withExpectedOutput(expected: String): String? =
-        outputStreamCaptor.toString().trim() shouldContain expected
+        outputStreamCaptor.toString().trim().run {
+            when (inverseMatcher) {
+                false -> this shouldContain expected
+                true  -> this shouldNotContain expected
+            }
+        }
 
     internal fun shouldNotOutput(unexpected: String): String? =
         outputStreamCaptor.toString().trim() shouldNotContain unexpected
