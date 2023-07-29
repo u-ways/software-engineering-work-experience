@@ -1,132 +1,140 @@
 package io.github.u.ways
 
-import java.util.stream.IntStream
-import java.util.stream.Stream
-import org.junit.jupiter.api.Assertions.*
+import io.github.u.ways.Challenge1Test.Companion.Department
+import io.github.u.ways.Challenge1Test.Companion.routingTo
+import io.github.u.ways.Challenge4Test.Companion.PRODUCT_TO_CODE_MAP
+import io.github.u.ways.domain.Request
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-// TODO: All tests here should be derived from the other tests, i.e. use the test methods in the other tests to
-//      generate the test cases here. This is to ensure that the tests here are always in sync with the other tests.
+/** NOTE:
+ *   All tests here SHOULD be derived from previous challenges.
+ *   I've decided to copy/paste the tests and add an adapter to the request
+ *   instead of using inheritance because I wanted to keep the tests independent
+ *   in the interest of readability purposes.
+ *
+ *   This is an experimental approach and I might change it in the future.
+ */
 class Challenge5Test : ChallengeBaseTest() {
 
-    @ParameterizedTest
-    @MethodSource("provideRoutingRequests")
-    fun `should route to appropriate department`(request: List<String>, expectedOutput: String) {
-        challenge5(request)
-        withExpectedOutput(expectedOutput)
+    @Nested
+    inner class Challenge1Scenarios {
+        @Test
+        fun `should route to broadband department when internet product is selected`() {
+            challenge5(adapt(withRequest(internet = true)))
+            withExpectedOutput(routingTo(Department.BROADBAND))
+        }
+
+        @Test
+        fun `should route to broadband department when tv product is selected`() {
+            challenge5(adapt(withRequest(tv = true)))
+            withExpectedOutput(routingTo(Department.BROADBAND))
+        }
+
+        @Test
+        fun `should route to telecom department when mobile product is selected`() {
+            challenge5(adapt(withRequest(mobile = true)))
+            withExpectedOutput(routingTo(Department.TELECOM))
+        }
+
+        @Test
+        fun `should route to telecom department when landline product is selected`() {
+            challenge5(adapt(withRequest(landline = true)))
+            withExpectedOutput(routingTo(Department.TELECOM))
+        }
+
+        @ParameterizedTest
+        @MethodSource("io.github.u.ways.Challenge1Test#scenariosThatRouteToBothDepartments")
+        fun `should route to both departments when a product from each department is selected`(
+            internet: Boolean, tv: Boolean = false, mobile: Boolean, landline: Boolean = false,
+        ) {
+            challenge5(adapt(withRequest(internet = internet, tv = tv, mobile = mobile, landline = landline)))
+            withExpectedOutput(routingTo(Department.BOTH))
+        }
     }
 
-    @Test
-    fun `should reject when no product is requested`() {
-        challenge5(withListRequest(internet = false, tv = false, mobile = false, landline = false))
-        withExpectedOutput("No products requested!")
+    @Nested
+    inner class Challenge2Scenarios {
+        @Test
+        fun `should invalidate request when no products are requested`() {
+            challenge5(adapt(withRequest(internet = false, tv = false, mobile = false, landline = false)))
+            withExpectedOutput("No products requested!")
+        }
+
+        @ParameterizedTest
+        @MethodSource("io.github.u.ways.Challenge2Test#provideProductCombinations")
+        fun `should consider the request valid when at least one product is requested`(
+            internet: Boolean,
+            tv: Boolean,
+            mobile: Boolean,
+            landline: Boolean,
+        ) {
+            challenge5(
+                adapt(
+                    withRequest(
+                        internet = internet,
+                        tv = tv,
+                        mobile = mobile,
+                        landline = landline,
+                    )
+                )
+            )
+            shouldNotOutput("No products requested!")
+        }
     }
 
-    @ParameterizedTest
-    @MethodSource("provideInvalidRequests")
-    fun `should reject when mandatory field is missing`(request: List<String>) {
-        challenge5(request)
-        withExpectedOutput("A mandatory field is missing!")
+    @Nested
+    inner class Challenge3Scenarios {
+        @Test
+        fun `should not output an error message when all mandatory fields are present`() {
+            challenge5(
+                adapt(
+                    withRequest(
+                        name = "John Doe", email = "john.doe@email.com",
+                        phone = "0123456789", address = "123, Some Street, Some City, Some Country",
+                        internet = true, tv = false, mobile = false, landline = false
+                    )
+                )
+            )
+            shouldNotOutput("A mandatory field is missing!")
+        }
+
+        @ParameterizedTest
+        @MethodSource("io.github.u.ways.Challenge3Test#provideInvalidRequests")
+        fun `should invalidate a request when a mandatory field is empty`(request: Request) {
+            challenge5(adapt(request))
+            withExpectedOutput("A mandatory field is missing!")
+        }
     }
 
-    @ParameterizedTest
-    @MethodSource("provideSingleProductRequests")
-    fun `should print product codes`(request: List<String>, expectedOutput: String) {
-        challenge5(request)
-        withExpectedOutput(expectedOutput)
-    }
+    @Nested
+    inner class Challenge4Scenarios {
+        @ParameterizedTest(name = "should output \"{1}\" when the subjected product is requested.")
+        @MethodSource("io.github.u.ways.Challenge4Test#provideSingleProductRequests")
+        fun `should print product codes`(request: Request, expectedOutput: String) {
+            challenge5(adapt(request))
+            withExpectedOutput(expectedOutput)
+        }
 
-    @ParameterizedTest
-    @MethodSource("provideAllProductsRequest")
-    fun `should print all product codes when everything is requested`(request: List<String>, expectedOutput: String) {
-        challenge5(request)
-        withExpectedOutput(expectedOutput)
+        @Test
+        fun `should output all product codes when everything is requested`() {
+            challenge5(adapt(withRequest(internet = true, tv = true, mobile = true, landline = true)))
+            PRODUCT_TO_CODE_MAP.values.forEach(::withExpectedOutput)
+        }
     }
 
     companion object {
-        private fun withListRequest(
-            name: String = "John Doe",
-            email: String = "john.doe@email.com",
-            phone: String = "0123456789",
-            address: String = "123, Some Street, Some City, Some Country",
-            internet: Boolean = false,
-            tv: Boolean = false,
-            mobile: Boolean = false,
-            landline: Boolean = false,
-        ): List<String> = listOf(
-            name,
-            email,
-            phone,
-            address,
-            internet.toString(),
-            tv.toString(),
-            mobile.toString(),
-            landline.toString()
+        private fun adapt(withRequest: Request): List<String> = listOf(
+            withRequest.name,
+            withRequest.email,
+            withRequest.phone,
+            withRequest.address,
+            withRequest.internet.toString(),
+            withRequest.tv.toString(),
+            withRequest.mobile.toString(),
+            withRequest.landline.toString()
         )
-
-        @JvmStatic
-        fun provideRoutingRequests(): Stream<Arguments> = Stream.of(
-            Arguments.of(
-                withListRequest(internet = true),
-                "Routing to Broadband department!\nInternet product code: F_004"
-            ),
-            Arguments.of(
-                withListRequest(tv = true),
-                "Routing to Broadband department!\nTV product code: F_003"
-            ),
-            Arguments.of(
-                withListRequest(mobile = true),
-                "Routing to Telecom department!\nMobile product code: F_002"
-            ),
-            Arguments.of(
-                withListRequest(landline = true),
-                "Routing to Telecom department!\nLandline product code: F_001"
-            ),
-            Arguments.of(
-                withListRequest(internet = true, tv = true, mobile = true, landline = true),
-                "Routing to Broadband & Telecom departments!\nInternet product code: F_004\nTV product code: F_003\nMobile product code: F_002\nLandline product code: F_001"
-            )
-        )
-
-        @JvmStatic
-        fun provideInvalidRequests(): Stream<Arguments> = IntStream
-            .range(0, 4)  // Change fields from 0 to 3 (NAME to ADDRESS)
-            .mapToObj { i -> Arguments.of(withListRequest().toMutableList().apply { this[i] = "" }) }
-
-        @JvmStatic
-        fun provideSingleProductRequests(): Stream<Arguments> {
-            val internetRequest = withListRequest(internet = true)
-            val tvRequest = withListRequest(tv = true)
-            val mobileRequest = withListRequest(mobile = true)
-            val landlineRequest = withListRequest(landline = true)
-
-            return Stream.of(
-                Arguments.of(internetRequest, "Internet product code: F_004"),
-                Arguments.of(tvRequest, "TV product code: F_003"),
-                Arguments.of(mobileRequest, "Mobile product code: F_002"),
-                Arguments.of(landlineRequest, "Landline product code: F_001")
-            )
-        }
-
-        @JvmStatic
-        fun provideAllProductsRequest(): Stream<Arguments> {
-            val allProductsRequest = withListRequest(
-                internet = true,
-                tv = true,
-                mobile = true,
-                landline = true
-            )
-
-            val allProductsOutput = "Routing to Broadband & Telecom departments!\n" +
-                "Internet product code: F_004\n" +
-                "TV product code: F_003\n" +
-                "Mobile product code: F_002\n" +
-                "Landline product code: F_001"
-
-            return Stream.of(Arguments.of(allProductsRequest, allProductsOutput))
-        }
     }
 }

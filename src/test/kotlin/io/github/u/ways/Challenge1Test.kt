@@ -40,12 +40,6 @@ class Challenge1Test : ChallengeBaseTest() {
         withExpectedOutput(routingTo(Department.BOTH))
     }
 
-    private enum class Department(val id: String) {
-        BROADBAND("Broadband"), TELECOM("Telecom"), BOTH("Broadband & Telecom")
-    }
-
-    private fun routingTo(department: Department) = "Routing to ${department.id} department!"
-
     companion object {
         @JvmStatic
         fun scenariosThatRouteToBothDepartments(): Stream<Arguments> =
@@ -64,5 +58,13 @@ class Challenge1Test : ChallengeBaseTest() {
             val (internet, tv, mobile, landline) = scenario
             return (internet || tv) && (mobile || landline)
         }
+
+        internal enum class Department(val id: String) {
+            BROADBAND("Broadband"), TELECOM("Telecom"), BOTH("Broadband & Telecom")
+        }
+
+        internal fun routingTo(department: Department) = "Routing to ${department.id} ${
+            if (department == Department.BOTH) "departments" else "department"
+        }!"
     }
 }

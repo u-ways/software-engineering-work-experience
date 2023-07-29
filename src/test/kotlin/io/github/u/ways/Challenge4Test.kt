@@ -22,7 +22,7 @@ class Challenge4Test : ChallengeBaseTest() {
     }
 
     companion object {
-        private val PRODUCT_TO_CODE_MAP = mapOf(
+        internal val PRODUCT_TO_CODE_MAP = mapOf(
             "internet" to "Internet product code: F_004",
             "tv" to "TV product code: F_003",
             "mobile" to "Mobile product code: F_002",
