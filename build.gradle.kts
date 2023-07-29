@@ -29,6 +29,13 @@ allprojects {
         test {
             useJUnitPlatform()
             testLogging { showStandardStreams = true }
+            // NOTE:
+            //   This is used for reverse testing the challenge tests to ensure certain tests
+            //   are not passing by accident when the challenges are not implemented.
+            // IMPORTANT:
+            //   This is also used to invalidate gradle cache for when the property is changed.
+            val inverseMatcher = "inverseMatcher"
+            systemProperty(inverseMatcher, System.getProperty(inverseMatcher, "false"))
         }
     }
 

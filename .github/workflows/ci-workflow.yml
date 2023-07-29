@@ -15,7 +15,7 @@ jobs:
           distribution: liberica
           cache: gradle
       - name: 'Run Automated Tests'
-        run: ./gradlew build -PinverseMatcher=true
+        run: ./gradlew build -DinverseMatcher=true
       - name: 'Uploading test artifacts'
         if: success() || failure()
         uses: actions/upload-artifact@v3
