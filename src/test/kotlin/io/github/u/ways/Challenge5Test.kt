@@ -8,7 +8,10 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
+// TODO: All tests here should be derived from the other tests, i.e. use the test methods in the other tests to
+//      generate the test cases here. This is to ensure that the tests here are always in sync with the other tests.
 class Challenge5Test : ChallengeBaseTest() {
+
     @ParameterizedTest
     @MethodSource("provideRoutingRequests")
     fun `should route to appropriate department`(request: List<String>, expectedOutput: String) {

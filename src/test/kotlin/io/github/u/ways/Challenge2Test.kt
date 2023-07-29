@@ -1,7 +1,7 @@
 package io.github.u.ways
 
 import java.util.stream.Stream
-import org.junit.jupiter.api.*
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -15,7 +15,7 @@ class Challenge2Test : ChallengeBaseTest() {
 
     @ParameterizedTest
     @MethodSource("provideProductCombinations")
-    fun `should validate request when at least one product requested`(
+    fun `should consider the request valid when at least one product is requested`(
         internet: Boolean,
         tv: Boolean,
         mobile: Boolean,

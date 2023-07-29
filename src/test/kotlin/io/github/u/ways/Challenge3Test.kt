@@ -2,7 +2,7 @@ package io.github.u.ways
 
 import io.github.u.ways.domain.Request
 import java.util.stream.Stream
-import org.junit.jupiter.api.*
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource
 class Challenge3Test : ChallengeBaseTest() {
 
     @Test
-    fun `should validate request when all mandatory fields are present`() {
+    fun `should not output an error message when all mandatory fields are present`() {
         challenge3(
             withRequest(
                 name = "John Doe", email = "john.doe@email.com",
@@ -23,7 +23,7 @@ class Challenge3Test : ChallengeBaseTest() {
 
     @ParameterizedTest
     @MethodSource("provideInvalidRequests")
-    fun `should invalidate request when a mandatory field is missing`(request: Request) {
+    fun `should invalidate a request when a mandatory field is empty`(request: Request) {
         challenge3(request)
         withExpectedOutput("A mandatory field is missing!")
     }
