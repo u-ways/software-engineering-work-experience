@@ -15,7 +15,7 @@ class Challenge3Test : ChallengeBaseTest() {
             withRequest(
                 name = "John Doe", email = "john.doe@email.com",
                 phone = "0123456789", address = "123, Some Street, Some City, Some Country",
-                internet = true, tv = false, mobile = false, landline = false
+                internet = true, voip = false, mobile = false, landline = false
             )
         )
         shouldNotOutput("A mandatory field is missing!")

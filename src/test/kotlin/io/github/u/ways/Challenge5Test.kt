@@ -28,8 +28,8 @@ class Challenge5Test : ChallengeBaseTest() {
         }
 
         @Test
-        fun `should route to broadband department when tv product is selected`() {
-            challenge5(adapt(withRequest(tv = true)))
+        fun `should route to broadband department when voip product is selected`() {
+            challenge5(adapt(withRequest(voip = true)))
             withExpectedOutput(routingTo(Department.BROADBAND))
         }
 
@@ -48,9 +48,9 @@ class Challenge5Test : ChallengeBaseTest() {
         @ParameterizedTest
         @MethodSource("io.github.u.ways.Challenge1Test#scenariosThatRouteToBothDepartments")
         fun `should route to both departments when a product from each department is selected`(
-            internet: Boolean, tv: Boolean = false, mobile: Boolean, landline: Boolean = false,
+            internet: Boolean, voip: Boolean = false, mobile: Boolean, landline: Boolean = false,
         ) {
-            challenge5(adapt(withRequest(internet = internet, tv = tv, mobile = mobile, landline = landline)))
+            challenge5(adapt(withRequest(internet = internet, voip = voip, mobile = mobile, landline = landline)))
             withExpectedOutput(routingTo(Department.BOTH))
         }
     }
@@ -59,7 +59,7 @@ class Challenge5Test : ChallengeBaseTest() {
     inner class Challenge2Scenarios {
         @Test
         fun `should invalidate request when no products are requested`() {
-            challenge5(adapt(withRequest(internet = false, tv = false, mobile = false, landline = false)))
+            challenge5(adapt(withRequest(internet = false, voip = false, mobile = false, landline = false)))
             withExpectedOutput("No products requested!")
         }
 
@@ -67,7 +67,7 @@ class Challenge5Test : ChallengeBaseTest() {
         @MethodSource("io.github.u.ways.Challenge2Test#provideProductCombinations")
         fun `should consider the request valid when at least one product is requested`(
             internet: Boolean,
-            tv: Boolean,
+            voip: Boolean,
             mobile: Boolean,
             landline: Boolean,
         ) {
@@ -75,7 +75,7 @@ class Challenge5Test : ChallengeBaseTest() {
                 adapt(
                     withRequest(
                         internet = internet,
-                        tv = tv,
+                        voip = voip,
                         mobile = mobile,
                         landline = landline,
                     )
@@ -94,7 +94,7 @@ class Challenge5Test : ChallengeBaseTest() {
                     withRequest(
                         name = "John Doe", email = "john.doe@email.com",
                         phone = "0123456789", address = "123, Some Street, Some City, Some Country",
-                        internet = true, tv = false, mobile = false, landline = false
+                        internet = true, voip = false, mobile = false, landline = false
                     )
                 )
             )
@@ -120,7 +120,7 @@ class Challenge5Test : ChallengeBaseTest() {
 
         @Test
         fun `should output all product codes when everything is requested`() {
-            challenge5(adapt(withRequest(internet = true, tv = true, mobile = true, landline = true)))
+            challenge5(adapt(withRequest(internet = true, voip = true, mobile = true, landline = true)))
             PRODUCT_TO_CODE_MAP.values.forEach(::withExpectedOutput)
         }
     }
@@ -132,7 +132,7 @@ class Challenge5Test : ChallengeBaseTest() {
             withRequest.phone,
             withRequest.address,
             withRequest.internet.toString(),
-            withRequest.tv.toString(),
+            withRequest.voip.toString(),
             withRequest.mobile.toString(),
             withRequest.landline.toString()
         )

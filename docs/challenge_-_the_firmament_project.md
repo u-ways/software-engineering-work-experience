@@ -14,13 +14,13 @@
 
 We are a broadband & telecommunication company, named `Firmament` we have the following products:
 - Internet (Product code: `F_004`)
-- TV (Product code: `F_003`)
+- VoIP (Product code: `F_003`)
 - Mobile (Product code: `F_002`)
 - Landline (Product code: `F_001`)
 
 When a customer buys one of our products, they submit a form with their details, and the products they want to purchase.
 Some products belong to a different department, and each department has a different process for handling requests. To be
-precise, the `Internet` and `TV` products belong to the `Broadband` department, while the `Mobile` and `Landline` products
+precise, the `Internet` and `VoIP` products belong to the `Broadband` department, while the `Mobile` and `Landline` products
 belong to the `Telecom` department.
 
 `Firmament` used to be a small company, and in the past, these form requests were handled manually by our sales team.
@@ -40,13 +40,13 @@ In this new process, the request comes in the form of a key-value pairs with the
     "phone": "0123456789",
     "address": "123, Some Street, Some City, Some Country",
     "Internet": "true",
-    "TV": "false",
+    "voip": "false",
     "Mobile": "true",
     "Landline": "false"
 }
 ```
 
-Where the `name`, `email`, `phone`, and `address` fields are **mandatory**, and the `Internet`, `TV`, `Mobile`, and `Landline`
+Where the `name`, `email`, `phone`, and `address` fields are **mandatory**, and the `Internet`, `VoIP`, `Mobile`, and `Landline`
 fields are optional. The value of each product field can **either** be `true` or `false`, indicating whether the customer
 wants to purchase that product or not.
 
@@ -54,7 +54,7 @@ In order, to correctly process their request, we need to know what products they
 right department. For example, if they have the `Internet` product, we need to route them to the `Broadband` department,
 and if they have the `Mobile` product, we need to route them to the `Telecom` department.
 
-![Firmament's Customer New Journey Flow Diagram](firmament_customer_new_journey.png)
+![Firmament's Customer New Journey Flow Diagram](firmament_customer_new_journey.drawio.png)
 
 Your job is to design and implement a system that would allow us to process these requests so customers can successfully
 place their orders.
@@ -68,13 +68,13 @@ handling requests. So the first level is about routing the request to the right 
 
 TASK: Based on the requested products, you need to route the request to the right department.
 
-If your received request has the `Internet` or `TV` products, you need to:
+If your received request has the `Internet` or `VoIP` products, you need to:
 - Print a message that says: `Routing to Broadband department!`
 
 If your received request has the `Mobile` or `Landline` products, you need to:
 - Print a message that says: `Routing to Telecom department!`
 
-If your received request that has both `Internet` or `TV` products, and `Mobile` or `Landline` products, you need to:
+If your received request that has both `Internet` or `VoIP` products, and `Mobile` or `Landline` products, you need to:
 - Print a message that says: `Routing to Broadband & Telecom departments!`
 
 You need to apply your solution inside the `challenge1` function in the `challenge1` file. 
@@ -128,8 +128,8 @@ TASK: You need to append the product codes to each product in the request data.
 If the customer has the `Internet` product, you need to:
 - Print the message: `Internet product code: F_004`
 
-If the customer has bought the `TV` and `Mobile` products, you need to:
-- Print the message: `TV product code: F_003`
+If the customer has bought the `VoIP` and `Mobile` products, you need to:
+- Print the message: `VoIP product code: F_003`
 - Print the message: `Mobile product code: F_002`
 
 And so on...
@@ -155,8 +155,8 @@ So far you had a data structure to work with, but now you don't! You only have a
 it. The list of string is guaranteed to be in the following format:
 
 ```text
-INDEX: 0   , 1    , 2    , 3      , 4       , 5 , 6     , 7  
-      [NAME, EMAIL, PHONE, ADDRESS, INTERNET, TV, MOBILE, LANDLINE]
+INDEX: 0   , 1    , 2    , 3      , 4       , 5   , 6     , 7  
+      [NAME, EMAIL, PHONE, ADDRESS, INTERNET, VoIP, MOBILE, LANDLINE]
 ```
 
 So a concrete example would be:

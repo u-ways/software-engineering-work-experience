@@ -14,8 +14,8 @@ class Challenge1Test : ChallengeBaseTest() {
     }
 
     @Test
-    fun `should route to broadband department when tv product is selected`() {
-        challenge1(withRequest(tv = true))
+    fun `should route to broadband department when voip product is selected`() {
+        challenge1(withRequest(voip = true))
         withExpectedOutput(routingTo(Department.BROADBAND))
     }
 
@@ -34,9 +34,9 @@ class Challenge1Test : ChallengeBaseTest() {
     @ParameterizedTest
     @MethodSource("scenariosThatRouteToBothDepartments")
     fun `should route to both departments when a product from each department is selected`(
-        internet: Boolean, tv: Boolean = false, mobile: Boolean, landline: Boolean = false,
+        internet: Boolean, voip: Boolean = false, mobile: Boolean, landline: Boolean = false,
     ) {
-        challenge1(withRequest(internet = internet, tv = tv, mobile = mobile, landline = landline))
+        challenge1(withRequest(internet = internet, voip = voip, mobile = mobile, landline = landline))
         withExpectedOutput(routingTo(Department.BOTH))
     }
 
@@ -55,8 +55,8 @@ class Challenge1Test : ChallengeBaseTest() {
             else cartesianPower(n - 1).flatMap { list -> this.map { element -> list + element } }
 
         private fun meetsRoutingToBothDepartmentsCriteria(scenario: List<Boolean>): Boolean {
-            val (internet, tv, mobile, landline) = scenario
-            return (internet || tv) && (mobile || landline)
+            val (internet, voip, mobile, landline) = scenario
+            return (internet || voip) && (mobile || landline)
         }
 
         internal enum class Department(val id: String) {

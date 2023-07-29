@@ -42,7 +42,7 @@ abstract class ChallengeBaseTest {
             phone: String = "0123456789",
             address: String = "123, Some Street, Some City, Some Country",
             internet: Boolean = false,
-            tv: Boolean = false,
+            voip: Boolean = false,
             mobile: Boolean = false,
             landline: Boolean = false,
         ) = Request(
@@ -51,7 +51,7 @@ abstract class ChallengeBaseTest {
             phone = phone,
             address = address,
             internet = internet,
-            tv = tv,
+            voip = voip,
             mobile = mobile,
             landline = landline,
         )

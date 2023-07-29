@@ -9,7 +9,7 @@ fun challenge5(request: List<String>) {
             - Phone: ${request[2]}
             - Address: ${request[3]}
             - Internet: ${request[4]}
-            - TV: ${request[5]}
+            - VoIP: ${request[5]}
             - Mobile: ${request[6]}
             - Landline: ${request[7]}
         """.trimIndent()

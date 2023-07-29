@@ -17,14 +17,14 @@ class Challenge4Test : ChallengeBaseTest() {
 
     @Test
     fun `should output all product codes when everything is requested`() {
-        challenge4(withRequest(internet = true, tv = true, mobile = true, landline = true))
+        challenge4(withRequest(internet = true, voip = true, mobile = true, landline = true))
         PRODUCT_TO_CODE_MAP.values.forEach(::withExpectedOutput)
     }
 
     companion object {
         internal val PRODUCT_TO_CODE_MAP = mapOf(
             "internet" to "Internet product code: F_004",
-            "tv" to "TV product code: F_003",
+            "voip" to "VoIP product code: F_003",
             "mobile" to "Mobile product code: F_002",
             "landline" to "Landline product code: F_001",
         )
@@ -35,7 +35,7 @@ class Challenge4Test : ChallengeBaseTest() {
                 val modifiedRequest = withRequest().let { request ->
                     when (product) {
                         "internet" -> request.copy(internet = true)
-                        "tv" -> request.copy(tv = true)
+                        "voip" -> request.copy(voip = true)
                         "mobile" -> request.copy(mobile = true)
                         "landline" -> request.copy(landline = true)
                         else -> request

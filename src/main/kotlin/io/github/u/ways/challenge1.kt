@@ -11,7 +11,7 @@ fun challenge1(request: Request) {
             - Phone: ${request.phone}
             - Address: ${request.address}
             - Internet: ${request.internet}
-            - TV: ${request.tv}
+            - VoIP: ${request.voip}
             - Mobile: ${request.mobile}
             - Landline: ${request.landline}
         """.trimIndent()

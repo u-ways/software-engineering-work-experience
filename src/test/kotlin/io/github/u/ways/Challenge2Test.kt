@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource
 class Challenge2Test : ChallengeBaseTest() {
     @Test
     fun `should invalidate request when no products are requested`() {
-        challenge2(withRequest(internet = false, tv = false, mobile = false, landline = false))
+        challenge2(withRequest(internet = false, voip = false, mobile = false, landline = false))
         withExpectedOutput("No products requested!")
     }
 
@@ -17,14 +17,14 @@ class Challenge2Test : ChallengeBaseTest() {
     @MethodSource("provideProductCombinations")
     fun `should consider the request valid when at least one product is requested`(
         internet: Boolean,
-        tv: Boolean,
+        voip: Boolean,
         mobile: Boolean,
         landline: Boolean,
     ) {
         challenge2(
             withRequest(
                 internet = internet,
-                tv = tv,
+                voip = voip,
                 mobile = mobile,
                 landline = landline,
             )

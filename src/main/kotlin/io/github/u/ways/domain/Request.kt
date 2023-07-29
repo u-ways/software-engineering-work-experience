@@ -12,7 +12,7 @@ data class Request(
     val phone: String,
     val address: String,
     val internet: Boolean,
-    val tv: Boolean,
+    val voip: Boolean,
     val mobile: Boolean,
     val landline: Boolean
 )
