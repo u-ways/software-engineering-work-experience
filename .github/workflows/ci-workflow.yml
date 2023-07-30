@@ -2,6 +2,9 @@ name: CI
 
 on: [workflow_call, workflow_dispatch]
 
+env:
+  INVERSE_MATCHER: ${{ vars.INVERSE_MATCHER || 'false' }}
+
 jobs:
   Test-Runner:
     runs-on: ubuntu-22.04
@@ -15,7 +18,7 @@ jobs:
           distribution: liberica
           cache: gradle
       - name: 'Run Automated Tests'
-        run: ./gradlew build -DinverseMatcher=true
+        run: ./gradlew build -DinverseMatcher=${{ env.INVERSE_MATCHER }}
       - name: 'Uploading test artifacts'
         if: success() || failure()
         uses: actions/upload-artifact@v3
