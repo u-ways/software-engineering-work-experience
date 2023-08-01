@@ -1,3 +1,4 @@
+import com.adarshr.gradle.testlogger.theme.ThemeType
 import org.gradle.api.JavaVersion.VERSION_17
 import org.gradle.api.tasks.wrapper.Wrapper.DistributionType.ALL
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -29,6 +30,7 @@ repositories(RepositoryHandler::mavenCentral)
 plugins {
     `java-library`
     alias(libs.plugins.jetbrains.kotlin.jvm)
+    alias(libs.plugins.adarshr.test.logger)
 }
 
 dependencies {
@@ -49,6 +51,11 @@ java {
             testReportDir.set(testReportDir.get().asFile.resolve(challengeDir))
         }
     }
+}
+
+testlogger {
+    theme = ThemeType.STANDARD
+    logLevel = LogLevel.LIFECYCLE
 }
 
 tasks {

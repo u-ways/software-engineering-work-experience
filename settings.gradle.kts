@@ -4,6 +4,7 @@ dependencyResolutionManagement {
             val kotlinVersion = "1.8.10"
             val kotestVersion = "5.5.4"
             val junitVersion = "5.8.2"
+            val testLoggerVersion = "3.2.0"
 
             library("kotlin-reflect", "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
             library("kotlin-stdlib", "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
@@ -12,6 +13,7 @@ dependencyResolutionManagement {
             library("junit-jupiter", "org.junit.jupiter:junit-jupiter:$junitVersion")
 
             plugin("jetbrains-kotlin-jvm", "org.jetbrains.kotlin.jvm").version(kotlinVersion)
+            plugin("adarshr-test-logger", "com.adarshr.test-logger").version(testLoggerVersion)
         }
     }
 }

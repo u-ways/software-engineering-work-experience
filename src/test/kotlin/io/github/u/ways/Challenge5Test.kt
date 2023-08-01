@@ -45,7 +45,7 @@ class Challenge5Test : ChallengeBaseTest() {
             withExpectedOutput(routingTo(Department.TELECOM))
         }
 
-        @ParameterizedTest(name = "should route to both departments when a product from each department is selected: internet={0}, voip={1}, mobile={2}, landline={3}")
+        @ParameterizedTest(name = "given scenario: internet={0}, voip={1}, mobile={2}, landline={3}")
         @MethodSource("io.github.u.ways.Challenge1Test#scenariosThatRouteToBothDepartments")
         fun `should route to both departments when a product from each department is selected`(
             internet: Boolean, voip: Boolean = false, mobile: Boolean, landline: Boolean = false,
@@ -63,9 +63,9 @@ class Challenge5Test : ChallengeBaseTest() {
             withExpectedOutput("No products requested!")
         }
 
-        @ParameterizedTest(name = "should consider the request valid when a product is requested: internet={0}, voip={1}, mobile={2}, landline={3}")
+        @ParameterizedTest(name = "given scenario: internet={0}, voip={1}, mobile={2}, landline={3}")
         @MethodSource("io.github.u.ways.Challenge2Test#provideProductCombinations")
-        fun `should consider the request valid when at least one product is requested`(
+        fun `should consider the request valid when at least one or more product is requested`(
             internet: Boolean,
             voip: Boolean,
             mobile: Boolean,
@@ -101,7 +101,7 @@ class Challenge5Test : ChallengeBaseTest() {
             shouldNotOutput("A mandatory field is missing!")
         }
 
-        @ParameterizedTest(name = "should invalidate a request when \"{0}\" is empty")
+        @ParameterizedTest(name = "given scenario has missing: {0}")
         @MethodSource("io.github.u.ways.Challenge3Test#provideInvalidRequests")
         fun `should invalidate a request when a mandatory field is empty`(missingField: String) {
             challenge5(adapt(withRequest().let { r ->
@@ -119,9 +119,9 @@ class Challenge5Test : ChallengeBaseTest() {
 
     @Nested
     inner class Challenge4Scenarios {
-        @ParameterizedTest(name = "should output \"{1}\" when the subjected product is requested.")
+        @ParameterizedTest(name = "given scenario \"{1}\"")
         @MethodSource("io.github.u.ways.Challenge4Test#provideSingleProductRequests")
-        fun `should print product codes`(request: Request, expectedOutput: String) {
+        fun `should print product code`(request: Request, expectedOutput: String) {
             challenge5(adapt(request))
             withExpectedOutput(expectedOutput)
         }

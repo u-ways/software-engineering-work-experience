@@ -20,7 +20,7 @@ class Challenge3Test : ChallengeBaseTest() {
         shouldNotOutput("A mandatory field is missing!")
     }
 
-    @ParameterizedTest(name = "should invalidate a request when \"{0}\" is empty")
+    @ParameterizedTest(name = "given scenario has missing: {0}")
     @MethodSource("provideInvalidRequests")
     fun `should invalidate a request when a mandatory field is empty`(missingField: String) {
         challenge3(withRequest().let { r ->

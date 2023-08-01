@@ -9,7 +9,7 @@ INVERSE_MATCHER ?= false
 #   make INVERSE_MATCHER=true test
 test:
 	@echo "Running All Project Tests"
-	./gradlew -DinverseMatcher=$(INVERSE_MATCHER) test --info
+	./gradlew -DinverseMatcher=$(INVERSE_MATCHER) test
 
 # USAGE:
 #   make test-challenge-1
@@ -18,4 +18,4 @@ test:
 test-challenge-%:
 	@echo $* | grep -E '^[0-9]+$$' >/dev/null || { echo "Invalid challenge number: $*"; exit 1; }
 	@echo "Running Tests For Challenge: $*"
-	./gradlew -DinverseMatcher=$(INVERSE_MATCHER) -DchallengeNumber=$* test --tests "io.github.u.ways.Challenge$*Test" --info
+	./gradlew -DinverseMatcher=$(INVERSE_MATCHER) -DchallengeNumber=$* test --tests "io.github.u.ways.Challenge$*Test"

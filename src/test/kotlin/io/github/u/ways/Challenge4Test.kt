@@ -8,9 +8,9 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 class Challenge4Test : ChallengeBaseTest() {
-    @ParameterizedTest(name = "should output \"{1}\" when the subjected product is requested.")
+    @ParameterizedTest(name = "given scenario \"{1}\"")
     @MethodSource("provideSingleProductRequests")
-    fun `should print product codes`(request: Request, expectedOutput: String) {
+    fun `should print product code`(request: Request, expectedOutput: String) {
         challenge4(request)
         withExpectedOutput(expectedOutput)
     }
