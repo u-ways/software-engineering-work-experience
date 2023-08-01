@@ -1,6 +1,5 @@
 package io.github.u.ways
 
-import io.github.u.ways.domain.Request
 import java.util.stream.Stream
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -21,10 +20,18 @@ class Challenge3Test : ChallengeBaseTest() {
         shouldNotOutput("A mandatory field is missing!")
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "should invalidate a request when \"{0}\" is empty")
     @MethodSource("provideInvalidRequests")
-    fun `should invalidate a request when a mandatory field is empty`(request: Request) {
-        challenge3(request)
+    fun `should invalidate a request when a mandatory field is empty`(missingField: String) {
+        challenge3(withRequest().let { r ->
+            when (missingField) {
+                "name" -> r.copy(name = "")
+                "email" -> r.copy(email = "")
+                "phone" -> r.copy(phone = "")
+                "address" -> r.copy(address = "")
+                else -> r.copy("", "", "", "")
+            }
+        })
         withExpectedOutput("A mandatory field is missing!")
     }
 
@@ -32,18 +39,7 @@ class Challenge3Test : ChallengeBaseTest() {
         @JvmStatic
         fun provideInvalidRequests(): Stream<Arguments> =
             listOf("name", "email", "phone", "address", "everything")
-                .map { field ->
-                    Arguments.of(
-                        withRequest().let { request ->
-                            when (field) {
-                                "name" -> request.copy(name = "")
-                                "email" -> request.copy(email = "")
-                                "phone" -> request.copy(phone = "")
-                                "address" -> request.copy(address = "")
-                                else -> request.copy("", "", "", "")
-                            }
-                        }
-                    )
-                }.stream()
+                .map { field -> Arguments.of(field) }
+                .stream()
     }
 }

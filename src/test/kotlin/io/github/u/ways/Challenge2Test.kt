@@ -13,7 +13,7 @@ class Challenge2Test : ChallengeBaseTest() {
         withExpectedOutput("No products requested!")
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "should consider the request valid when a product is requested: internet={0}, voip={1}, mobile={2}, landline={3}")
     @MethodSource("provideProductCombinations")
     fun `should consider the request valid when at least one product is requested`(
         internet: Boolean,

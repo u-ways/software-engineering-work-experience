@@ -45,7 +45,7 @@ class Challenge5Test : ChallengeBaseTest() {
             withExpectedOutput(routingTo(Department.TELECOM))
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "should route to both departments when a product from each department is selected: internet={0}, voip={1}, mobile={2}, landline={3}")
         @MethodSource("io.github.u.ways.Challenge1Test#scenariosThatRouteToBothDepartments")
         fun `should route to both departments when a product from each department is selected`(
             internet: Boolean, voip: Boolean = false, mobile: Boolean, landline: Boolean = false,
@@ -63,7 +63,7 @@ class Challenge5Test : ChallengeBaseTest() {
             withExpectedOutput("No products requested!")
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "should consider the request valid when a product is requested: internet={0}, voip={1}, mobile={2}, landline={3}")
         @MethodSource("io.github.u.ways.Challenge2Test#provideProductCombinations")
         fun `should consider the request valid when at least one product is requested`(
             internet: Boolean,
@@ -101,10 +101,18 @@ class Challenge5Test : ChallengeBaseTest() {
             shouldNotOutput("A mandatory field is missing!")
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "should invalidate a request when \"{0}\" is empty")
         @MethodSource("io.github.u.ways.Challenge3Test#provideInvalidRequests")
-        fun `should invalidate a request when a mandatory field is empty`(request: Request) {
-            challenge5(adapt(request))
+        fun `should invalidate a request when a mandatory field is empty`(missingField: String) {
+            challenge5(adapt(withRequest().let { r ->
+                when (missingField) {
+                    "name" -> r.copy(name = "")
+                    "email" -> r.copy(email = "")
+                    "phone" -> r.copy(phone = "")
+                    "address" -> r.copy(address = "")
+                    else -> r.copy("", "", "", "")
+                }
+            }))
             withExpectedOutput("A mandatory field is missing!")
         }
     }

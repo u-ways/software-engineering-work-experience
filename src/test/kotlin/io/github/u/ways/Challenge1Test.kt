@@ -31,7 +31,7 @@ class Challenge1Test : ChallengeBaseTest() {
         withExpectedOutput(routingTo(Department.TELECOM))
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "should route to both departments when a product from each department is selected: internet={0}, voip={1}, mobile={2}, landline={3}")
     @MethodSource("scenariosThatRouteToBothDepartments")
     fun `should route to both departments when a product from each department is selected`(
         internet: Boolean, voip: Boolean = false, mobile: Boolean, landline: Boolean = false,
