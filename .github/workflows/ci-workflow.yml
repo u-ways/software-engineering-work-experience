@@ -18,29 +18,25 @@ jobs:
           distribution: liberica
           cache: gradle
       - name: "Setting Challenge Solution Checker Context"
-        # This is used to trigger inverse matching conditions on the unsolved (main) repository
-        # NOTE: The reason why this is defined here instead of the env context because the environment
-        #       variables cannot be defined in terms of other variables.
-        #       See: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#env
         run: echo "INVERSE_MATCHER=${{ github.repository == env.MAIN_REPOSITORY_ORIGIN && 'true' || 'false' }}" >> $GITHUB_ENV
       - name: 'Checking Challenge Number 1 Results'
-        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge1Test" --info
+        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge1Test" --info --test-results-dir=./build/test-results/challenge1 --test-reports-dir=./build/reports/challenge1
       - name: 'Checking Challenge Number 2 Results'
-        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge2Test" --info
+        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge2Test" --info --test-results-dir=./build/test-results/challenge2 --test-reports-dir=./build/reports/challenge2
       - name: 'Checking Challenge Number 3 Results'
-        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge3Test" --info
+        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge3Test" --info --test-results-dir=./build/test-results/challenge3 --test-reports-dir=./build/reports/challenge3
       - name: 'Checking Challenge Number 4 Results'
-        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge4Test" --info
+        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge4Test" --info --test-results-dir=./build/test-results/challenge4 --test-reports-dir=./build/reports/challenge4
       - name: 'Checking Challenge Number 5 Results'
-        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge5Test" --info
+        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge5Test" --info --test-results-dir=./build/test-results/challenge5 --test-reports-dir=./build/reports/challenge5
       - name: 'Uploading test artifacts'
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
           name: test-artifacts
           path: |
-            ./build/test-results/test/*.xml
-            ./build/reports
+            ./build/test-results/challenge*/test/*.xml
+            ./build/reports/challenge*
 
   Test-Reporter:
     needs: Test-Runner
@@ -51,9 +47,12 @@ jobs:
         uses: actions/checkout@v3
       - name: 'Downloading all artifacts'
         uses: actions/download-artifact@v3
+        with:
+          name: test-artifacts
+          path: ./test-artifacts
       - name: 'Generating test report for Github actions'
         uses: dorny/test-reporter@v1.6.0
         with:
           name: 'Test Report: JUnit'
-          path: ./test-artifacts/test-results/test/*.xml
+          path: ./test-artifacts/test-results/challenge*/test/*.xml
           reporter: java-junit
