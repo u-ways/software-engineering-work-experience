@@ -20,23 +20,23 @@ jobs:
       - name: "Setting Challenge Solution Checker Context"
         run: echo "INVERSE_MATCHER=${{ github.repository == env.MAIN_REPOSITORY_ORIGIN && 'true' || 'false' }}" >> $GITHUB_ENV
       - name: 'Checking Challenge Number 1 Results'
-        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge1Test" --info --test-results-dir=./build/test-results/challenge1 --test-reports-dir=./build/reports/challenge1
+        run: make INVERSE_MATCHER="${{ env.INVERSE_MATCHER }}" test-challenge-1
       - name: 'Checking Challenge Number 2 Results'
-        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge2Test" --info --test-results-dir=./build/test-results/challenge2 --test-reports-dir=./build/reports/challenge2
+        run: make INVERSE_MATCHER="${{ env.INVERSE_MATCHER }}" test-challenge-2
       - name: 'Checking Challenge Number 3 Results'
-        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge3Test" --info --test-results-dir=./build/test-results/challenge3 --test-reports-dir=./build/reports/challenge3
+        run: make INVERSE_MATCHER="${{ env.INVERSE_MATCHER }}" test-challenge-3
       - name: 'Checking Challenge Number 4 Results'
-        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge4Test" --info --test-results-dir=./build/test-results/challenge4 --test-reports-dir=./build/reports/challenge4
+        run: make INVERSE_MATCHER="${{ env.INVERSE_MATCHER }}" test-challenge-4
       - name: 'Checking Challenge Number 5 Results'
-        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge5Test" --info --test-results-dir=./build/test-results/challenge5 --test-reports-dir=./build/reports/challenge5
+        run: make INVERSE_MATCHER="${{ env.INVERSE_MATCHER }}" test-challenge-5
       - name: 'Uploading test artifacts'
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
           name: test-artifacts
           path: |
-            ./build/test-results/challenge*/test/*.xml
-            ./build/reports/challenge*
+            ./build/test-results/challenge-*/test/*.xml
+            ./build/reports/challenge-*
 
   Test-Reporter:
     needs: Test-Runner
@@ -54,5 +54,5 @@ jobs:
         uses: dorny/test-reporter@v1.6.0
         with:
           name: 'Test Report: JUnit'
-          path: ./test-artifacts/test-results/challenge*/test/*.xml
+          path: ./test-artifacts/test-results/challenge-*/test/*.xml
           reporter: java-junit
