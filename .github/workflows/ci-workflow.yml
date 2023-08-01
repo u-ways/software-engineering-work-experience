@@ -3,7 +3,7 @@ name: CI
 on: [workflow_call, workflow_dispatch]
 
 env:
-  INVERSE_MATCHER: ${{ vars.INVERSE_MATCHER || 'false' }}
+  MAIN_REPOSITORY_ORIGIN: 'u-ways/software-engineering-workexperience'
 
 jobs:
   Test-Runner:
@@ -17,8 +17,22 @@ jobs:
           java-version: 17
           distribution: liberica
           cache: gradle
-      - name: 'Run Automated Tests'
-        run: ./gradlew build -DinverseMatcher=${{ env.INVERSE_MATCHER }}
+      - name: "Setting Challenge Solution Checker Context"
+        # This is used to trigger inverse matching conditions on the unsolved (main) repository
+        # NOTE: The reason why this is defined here instead of the env context because the environment
+        #       variables cannot be defined in terms of other variables.
+        #       See: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#env
+        run: echo "INVERSE_MATCHER=${{ github.repository == env.MAIN_REPOSITORY_ORIGIN && 'true' || 'false' }}" >> $GITHUB_ENV
+      - name: 'Checking Challenge Number 1 Solution'
+        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge1Test" --info
+      - name: 'Checking Challenge Number 2 Solution'
+        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge2Test" --info
+      - name: 'Checking Challenge Number 3 Solution'
+        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge3Test" --info
+      - name: 'Checking Challenge Number 4 Solution'
+        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge4Test" --info
+      - name: 'Checking Challenge Number 5 Solution'
+        run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge5Test" --info
       - name: 'Uploading test artifacts'
         if: success() || failure()
         uses: actions/upload-artifact@v3
