@@ -23,15 +23,15 @@ jobs:
         #       variables cannot be defined in terms of other variables.
         #       See: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#env
         run: echo "INVERSE_MATCHER=${{ github.repository == env.MAIN_REPOSITORY_ORIGIN && 'true' || 'false' }}" >> $GITHUB_ENV
-      - name: 'Checking Challenge Number 1 Solution'
+      - name: 'Checking Challenge Number 1 Results'
         run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge1Test" --info
-      - name: 'Checking Challenge Number 2 Solution'
+      - name: 'Checking Challenge Number 2 Results'
         run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge2Test" --info
-      - name: 'Checking Challenge Number 3 Solution'
+      - name: 'Checking Challenge Number 3 Results'
         run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge3Test" --info
-      - name: 'Checking Challenge Number 4 Solution'
+      - name: 'Checking Challenge Number 4 Results'
         run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge4Test" --info
-      - name: 'Checking Challenge Number 5 Solution'
+      - name: 'Checking Challenge Number 5 Results'
         run: ./gradlew -DinverseMatcher=${{ env.INVERSE_MATCHER }} test --tests "io.github.u.ways.Challenge5Test" --info
       - name: 'Uploading test artifacts'
         if: success() || failure()
@@ -56,5 +56,4 @@ jobs:
         with:
           name: 'Test Report: JUnit'
           path: ./test-artifacts/test-results/test/*.xml
-          fail-on-error: 'false'
           reporter: java-junit
