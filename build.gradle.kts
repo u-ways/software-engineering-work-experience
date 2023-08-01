@@ -55,7 +55,7 @@ java {
 
 testlogger {
     theme = ThemeType.STANDARD
-    logLevel = LogLevel.LIFECYCLE
+    logLevel = LogLevel.QUIET
 }
 
 tasks {
