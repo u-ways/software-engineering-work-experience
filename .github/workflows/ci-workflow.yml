@@ -8,6 +8,8 @@ env:
 jobs:
   Test-Runner:
     runs-on: ubuntu-22.04
+    outputs:
+      inverse_matcher: ${{ steps.set_inverse_matcher.outputs.inverse_matcher }}
     steps:
       - name: 'Checkout to current branch'
         uses: actions/checkout@v3
@@ -17,29 +19,66 @@ jobs:
           java-version: 17
           distribution: liberica
           cache: gradle
-      - name: "Setting Challenge Solution Checker Context"
-        run: echo "INVERSE_MATCHER=${{ github.repository == env.MAIN_REPOSITORY_ORIGIN && 'true' || 'false' }}" >> $GITHUB_ENV
-      - name: 'Checking Challenge Number 1 Results'
-        run: make INVERSE_MATCHER="${{ env.INVERSE_MATCHER }}" test-challenge-1
-      - name: 'Checking Challenge Number 2 Results'
-        run: make INVERSE_MATCHER="${{ env.INVERSE_MATCHER }}" test-challenge-2
-      - name: 'Checking Challenge Number 3 Results'
-        run: make INVERSE_MATCHER="${{ env.INVERSE_MATCHER }}" test-challenge-3
-      - name: 'Checking Challenge Number 4 Results'
-        run: make INVERSE_MATCHER="${{ env.INVERSE_MATCHER }}" test-challenge-4
-      - name: 'Checking Challenge Number 5 Results'
-        run: make INVERSE_MATCHER="${{ env.INVERSE_MATCHER }}" test-challenge-5
+      - name: 'Cache Gradle packages'
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: ${{ runner.os }}-gradle
+      - name: 'Cache compiled classes'
+        uses: actions/cache@v3
+        with:
+          path: ./build/classes
+          key: ${{ runner.os }}-classes-${{ hashFiles('**/*.kt') }}
+          restore-keys: ${{ runner.os }}-classes
+      - name: 'Setting Challenge Solution Checker Context'
+        id: set_inverse_matcher
+        run: echo "inverse_matcher=${{ github.repository == env.MAIN_REPOSITORY_ORIGIN && 'true' || 'false' }}" >> $GITHUB_OUTPUT
+      - name: 'Compile Project Sourcecode'
+        run: make compile
+
+  Challenges:
+    needs: Test-Runner
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        challenge: [1, 2, 3, 4, 5]
+    steps:
+      - name: 'Checkout to current branch'
+        uses: actions/checkout@v3
+      - name: 'Set up JDK 17'
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: liberica
+          cache: gradle
+      # NOTE: key and restore-keys must match Test-Runner cache configs
+      - name: 'Restore cached Gradle packages'
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: ${{ runner.os }}-gradle
+      # NOTE: key and restore-keys must match Test-Runner cache configs
+      - name: 'Restore cached compiled classes'
+        uses: actions/cache@v3
+        with:
+          path: ./build/classes
+          key: ${{ runner.os }}-classes-${{ hashFiles('**/*.kt') }}
+          restore-keys: ${{ runner.os }}-classes
+      - name: 'Checking Challenge Number ${{ matrix.challenge }} Results'
+        run: make INVERSE_MATCHER="${{ needs.Test-Runner.outputs.inverse_matcher }}" test-challenge-${{ matrix.challenge }}
       - name: 'Uploading test artifacts'
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
           name: test-artifacts
           path: |
-            ./build/test-results/challenge-*/test/*.xml
-            ./build/reports/challenge-*
+            ./build/test-results/challenge-${{ matrix.challenge }}/test/*.xml
+            ./build/reports/challenge-${{ matrix.challenge }}
 
   Test-Reporter:
-    needs: Test-Runner
+    needs: Challenges
     if: success() || failure()
     runs-on: ubuntu-22.04
     steps:

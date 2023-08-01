@@ -5,6 +5,12 @@ INVERSE_MATCHER ?= false
 # RECIPES #############################################################
 
 # USAGE:
+#   make compile
+compile:
+	@echo "Building project"
+	./gradlew build -x test --info
+
+# USAGE:
 #   make test
 #   make INVERSE_MATCHER=true test
 test:
