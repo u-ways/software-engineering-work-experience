@@ -1,4 +1,4 @@
-# 🚀 Software Engineering - The Work Experience Edition 🚀
+# 🚀 Software Engineering - The Experience 🚀
 
 [![CICD](https://github.com/u-ways/software-engineering-work-experience/actions/workflows/CICD.yml/badge.svg)](https://github.com/u-ways/software-engineering-work-experience/actions/workflows/CICD.yml)
 [![Code Climate](https://api.codeclimate.com/v1/badges/170a6d39d1ab23f61016/maintainability)](https://codeclimate.com/github/u-ways/software-engineering-work-experience/maintainability)
@@ -9,9 +9,9 @@
 ## Table of Contents 📑
 - [Introduction 📜](#introduction-)
 - [On The Agenda 📅](#on-the-agenda-)
-  - [Day 1 - The Basics & The Project 🔬](#day-1---the-basics--the-project-)
-  - [Day 2 - Continue the Project as a Team Member 👨‍💻](#day-2---continue-the-project-as-a-team-member-)
-- [Learning objectives 🎯](#learning-objectives-)
+  - [The Basics & The Project 🔬](#the-basics--the-project-)
+  - [Extra Hands-on Activities 👨‍💻](#extra-hands-on-activities-)
+- [Learning Objectives 🎯](#learning-objectives-)
 - [Getting Started 🏁](#getting-started-)
   - [Prerequisites 👓](#prerequisites-)
   - [Setup 🛠️](#setup-)
@@ -42,34 +42,42 @@ and making a tangible impact on the world. Computer code is one of the many tool
 
 ## On The Agenda 📅
 
-### Day 1 - The Basics & The Project 🔬
+### The Basics & The Project 🔬
 
-The day will be divided into two parts: the morning session and the afternoon session. The morning session will be
-dedicated to learning about the different aspects of software engineering, while the afternoon session will be dedicated
-to applying what you've learned in a mini-project that reflects a real-world scenario.
+The experience will be divided into various sessions, each focusing on different aspects of software engineering. 
+The time required for each session is mentioned alongside, providing you with a comprehensive insight into the life
+of a software engineer.
 
-1. Onboarding - Laptop collection & Introduction to our team. (5 minutes)
-2. Why We Do What We Do - Introduction to the company and our mission. (5 minutes)
-3. How We Work - Agile, Scrum, Kanban, etc. (15 minutes)
-4. The Software Development Life Cycle - From concept to production. (15 minutes)
-5. The Tools of the Trade - IDEs, Git, Slack, etc. (15 minutes)
-6. Research Break (Self-Learning Session) - A chance to review and reinforce what you've learned so far. (2 hours)
-7. Lunch Break - A chance to relax, recharge and have lunch on us! (1 hour)
-8. Project Kickoff - Introduction to the project and the problem statement. (15 minutes)
-9. Dev-analysis Phase - Understanding the requirements and designing the solution. (1 hour)
-10. Kick-off Ceremony - Presenting your analysis and proposed solution to the team. (10 minutes)
-11. Implementation Phase - Working on the solution. (2 hours)
-12. Sign-off ceremony - Presenting your solution to the team, and handing it over to the testers. (10 minutes)
-13. The Wrap Up - Feedback, Q&A, and closing remarks. (15 minutes)
+1. **Onboarding** - Laptop collection & Introduction to our team. (5 minutes)
+2. **Why We Do What We Do** - Introduction to the company and our mission. (5 minutes)
+3. **How We Work** - Agile, Scrum, Kanban, etc. (15 minutes)
+4. **The Software Development Life Cycle** - From concept to production. (15 minutes)
+5. **The Tools of the Trade** - IDEs, Git, Slack, etc. (15 minutes)
+6. **Research Break (Self-Learning Session)** - A chance to review and reinforce what you've learned so far. (2 hours)
+7. **Lunch Break** - A chance to relax, recharge and have lunch on us! (1 hour)
+8. **Project Kickoff** - Introduction to the project and the problem statement. (15 minutes)
+9. **Dev-analysis Phase** - Understanding the requirements and designing the solution. (1 hour)
+10. **Kick-off Ceremony** - Presenting your analysis and proposed solution to the team. (10 minutes)
+11. **Implementation Phase** - Working on the solution. (2 hours)
+12. **Sign-off ceremony** - Presenting your final solution to the team, and handing it over to the testers. (10 minutes)
+13. **The Wrap Up** - Feedback, Q&A, and closing remarks. (15 minutes)
 
-### Day 2 - Continue the Project as a Team Member 👨‍💻
+### Extra Hands-on Activities 👨‍💻
 
-In the next day, you will get the opportunity to participate in our stand-up meeting, shadow our team of experts, 
-learning more about their roles and, most importantly, how they work together to bring concepts to life. You will be 
-assigned a mentor who will guide you throughout the day, answering any questions you may have and helping you understand 
-the different aspects of software engineering.
+Throughout the experience, you may also have the opportunity to:
 
-## Learning objectives 🎯
+- **Team Collaboration Experience** - Engage in agile practices such as stand-up meetings, sprint planning, and 
+  retrospectives. This will allow you to experience how our team collaborates, communicates, and prioritizes tasks 
+  to achieve our goals. This can happen at any time, providing a hands-on understanding of agile methodologies 
+  and our team's dynamics.
+- **Shadowing Professionals** - Gain insights by shadowing experienced professionals, understanding their 
+  daily tasks, challenges, and how they overcome them. Shadowing allows you to experience programming practices
+  to the extreme, such as pair programming and test-driven development.
+
+The availability, order and duration of these activities may vary, but each session is designed to provide a unique 
+insight into the field of software engineering, allowing you to engage, learn, and have fun!
+
+## Learning Objectives 🎯
 
 By participating in this 2-day immersive experience of software engineering, we aim to equip you with the following 
 knowledge and skills:
@@ -108,7 +116,7 @@ you to consider a rewarding career in this field.
    - If you want to learn about forking in detail, [read this guide](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
 3. We are going to use the Kotlin Playground to write and run our code as our cloud-based IDE. 
    - [Click here to open the Kotlin Playground](https://play.kotlinlang.org/#eyJ2ZXJzaW9uIjoiMS45LjAiLCJwbGF0Zm9ybSI6ImphdmEiLCJhcmdzIjoiIiwibm9uZU1hcmtlcnMiOnRydWUsInRoZW1lIjoiaWRlYSIsImNvZGUiOiJmdW4gbWFpbigpIHtcbiAgICB2YWwga290bGluID0gXCLwn5mCXCJcbiAgICBwcmludGxuKGtvdGxpbilcbn0ifQ==).
-   - If you're having any issues with the Kotlin Playground, please let us know, and we'll help you out.
+   - If you're having any issues with the Kotlin Playground, please let us know, and we'll fix it!
 4. Join our Slack or Teams workspace to communicate with our team and ask any questions. 
    - We will provide you with the workspace details on the day of the tour.
    - This is entirely optional if you're working with us on-site, as you're more than welcome to ask us in person.
