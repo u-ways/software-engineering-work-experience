@@ -5,6 +5,13 @@ on: [workflow_call, workflow_dispatch]
 env:
   MAIN_REPOSITORY_ORIGIN: 'u-ways/software-engineering-workexperience'
 
+permissions:
+  statuses: write
+  checks: write
+  contents: write
+  pull-requests: write
+  actions: write
+
 jobs:
   Test-Runner:
     runs-on: ubuntu-22.04
