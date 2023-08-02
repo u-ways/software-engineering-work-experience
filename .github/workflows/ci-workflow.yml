@@ -79,10 +79,15 @@ jobs:
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
+          # NOTE:
+          #    With upload-artifact actions, the root directory you upload will be replaced with the
+          #    name set (i.e. "test-artifacts") by default. This means on download, you should reference
+          #    the files like so: `./test-artifacts/path/to/file`
           name: test-artifacts
           path: |
             ./build/test-results/challenge-${{ matrix.challenge }}/test/*.xml
             ./build/reports/challenge-${{ matrix.challenge }}
+            ./build/reports/jacoco/test/jacocoTestReport.xml/challenge-${{ matrix.challenge }}.xml
 
   Test-Reporter:
     needs: Challenges
@@ -102,3 +107,13 @@ jobs:
           name: 'Test Report: JUnit'
           path: ./test-artifacts/test-results/challenge-*/test/*.xml
           reporter: java-junit
+      - name: 'Uploading test coverage results to CodeClimate'
+        uses: paambaati/codeclimate-action@v5.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          JACOCO_SOURCE_PATH: "${{ github.workspace }}/src/main/kotlin"
+        with:
+          # NOTE:
+          #   Paambaati's CodeClimate plugin has poor error reporting, so expect misleading
+          #   error logs when you supplement the wrong "coverageLocations" value.
+          coverageLocations: ${{ github.workspace }}/test-artifacts/reports/jacoco/test/jacocoTestReport.xml/challenge-*.xml:jacoco

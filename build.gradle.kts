@@ -6,15 +6,33 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 // CUSTOM FLAGS --------------------------------------------------------------
 
 /**
- * Allow setting custom test results and reporting directories to
- * separate the challenge tests from the unit tests.
+ * Allow setting custom test directory reporting when running tasks to
+ * prevent overwriting reports when running each challenge separately.
  */
 val challengeNumberFlag = "challengeNumber"
+
 /**
  * This is used for reverse testing the challenge tests to ensure certain tests
  * are not passing by accident when the challenges are not implemented.
  */
 val inverseMatcherFlag = "inverseMatcher"
+
+// CUSTOM FUNCTIONS -----------------------------------------------------------
+
+/**
+ * Convince function to run specific task configurations only if the challenge
+ * number flag is set. (e.g. to separate challenge tests report, so they won't
+ * be overwritten by other challenge tests report)
+ *
+ * This function will pass a directory name to the logic function, which is
+ * the challenge number flag value. (e.g. "challenge-1")
+ *
+ * @param logic The logic to run if the challenge number flag is set.
+ */
+fun onSingleChallengeRuns(logic: (String) -> Unit) =
+    System.getProperty(challengeNumberFlag, "0")
+        .toInt()
+        .let { if (it > 0) logic.invoke("challenge-$it") }
 
 // META -----------------------------------------------------------------------
 
@@ -29,6 +47,7 @@ repositories(RepositoryHandler::mavenCentral)
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     `java-library`
+    jacoco
     alias(libs.plugins.jetbrains.kotlin.jvm)
     alias(libs.plugins.adarshr.test.logger)
 }
@@ -44,12 +63,9 @@ dependencies {
 
 java {
     toolchain { languageVersion.set(JavaLanguageVersion.of(17)) }
-    System.getProperty(challengeNumberFlag, "0").toInt().let {
-        if (it > 0) {
-            val challengeDir = "challenge-$it"
-            testResultsDir.set(testResultsDir.get().asFile.resolve(challengeDir))
-            testReportDir.set(testReportDir.get().asFile.resolve(challengeDir))
-        }
+    onSingleChallengeRuns { directory ->
+        testResultsDir.set(testResultsDir.get().asFile.resolve(directory))
+        testReportDir.set(testReportDir.get().asFile.resolve(directory))
     }
 }
 
@@ -63,6 +79,19 @@ tasks {
         useJUnitPlatform()
         testLogging { showStandardStreams = true }
         systemProperty(inverseMatcherFlag, System.getProperty(inverseMatcherFlag, "false"))
+        finalizedBy(jacocoTestReport)
+    }
+
+    jacocoTestReport {
+        reports {
+            onSingleChallengeRuns { filename ->
+                html.required.set(false)
+                with(xml) {
+                    required.set(true)
+                    outputLocation.set(xml.outputLocation.get().asFile.resolve("$filename.xml"))
+                }
+            }
+        }
     }
 
     wrapper {
