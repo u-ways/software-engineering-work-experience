@@ -3,7 +3,7 @@ name: CI
 on: [workflow_call, workflow_dispatch]
 
 env:
-  MAIN_REPOSITORY_ORIGIN: 'u-ways/software-engineering-workexperience'
+  MAIN_REPOSITORY_ORIGIN: 'u-ways/software-engineering-work-experience'
 
 permissions:
   statuses: write

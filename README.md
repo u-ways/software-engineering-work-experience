@@ -123,7 +123,7 @@ about them.
 To help you with this, we've compiled a list of resources that you can use to learn more about the different topics
 covered in this tour. Feel free to explore these resources, or use your own. The choice is yours!
 
-These resources can be found in the project's Wiki page: [Wiki - Software Engineering Work Experience](https://github.com/u-ways/software-engineering-workexperience/wiki).
+These resources can be found in the project's Wiki page: [Wiki - Software Engineering Work Experience](https://github.com/u-ways/software-engineering-work-experience/wiki).
 
 ### The challenge 🏆
 
