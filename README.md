@@ -124,6 +124,6 @@ These resources can be found in the project's Wiki page: [Wiki - Software Engine
 When you're ready you can find the challenge details in the following page: [Challenge - The Firmament Project](./docs/challenge_-_the_firmament_project.md).
 
 Remember, this is not an exam, we want you to have fun and learn as much as you can, so don't worry if you don't
-understand something, just ask us, and we'll help you out!
+understand something, just ask us, and we'll help you out! Happy Learning!
 
 ___
