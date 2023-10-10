@@ -35,22 +35,20 @@ In this new process, the request comes in the form of a key-value pairs with the
 
 ```json
 {
-    "name": "John Doe",
-    "email": "john.doe@email.com",
-    "phone": "0123456789",
-    "address": "123, Some Street, Some City, Some Country",
+    "Name": "John Doe",
+    "Email": "john.doe@email.com",
+    "Phone": "0123456789",
+    "Address": "123, Some Street, Some City, Some Country",
     "Internet": "true",
-    "voip": "false",
+    "VoIP": "false",
     "Mobile": "true",
     "Landline": "false"
 }
 ```
 
-Where the `name`, `email`, `phone`, and `address` fields are **mandatory**, and the `Internet`, `VoIP`, `Mobile`, and `Landline`
-fields are optional. The value of each product field can **either** be `true` or `false`, indicating whether the customer
-wants to purchase that product or not.
+All fields are **mandatory** (i.e. all of those key-value pairs will always be present in the request). The `Name`, `Email`, `Phone` and `Address` are of String values, and **cannot** be empty (null) or blank. Whereas the `Internet`, `VoIP`, `Mobile`, and `Landline` values are of Boolean values, meaning that the value is **either** `true` or `false`, which will indicate whether the customer wants (`true`) to purchase the product or not (`false`). Finally, at least one product should be marked as `true` within an incoming request, otherwise, what's the point of receiving a request with no products requested? 😲
 
-In order, to correctly process their request, we need to know what products they have, so we can route them to the
+In order to correctly process their request, we need to know what products they have, so we can route them to the
 right department. For example, if they have the `Internet` product, we need to route them to the `Broadband` department,
 and if they have the `Mobile` product, we need to route them to the `Telecom` department.
 
